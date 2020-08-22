@@ -10,8 +10,8 @@ data class EntryData(
     @field:Json(name = "num_comments") val commentCount: Int,
 )
 
-data class TopResponse(val data: Data)
+data class TopResponse(val data: ResponseData)
 
-data class Data(val children: List<EntryObject>)
+data class ResponseData(val children: List<EntryObject>)
 
 data class EntryObject(val data: EntryData)
