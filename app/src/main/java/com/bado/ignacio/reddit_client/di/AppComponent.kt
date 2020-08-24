@@ -8,9 +8,10 @@ import dagger.Binds
 import dagger.BindsInstance
 import dagger.Component
 import dagger.Module
+import java.io.Serializable
 
 @Component(modules = [NetworkModule::class, AppModule::class])
-interface AppComponent {
+interface AppComponent : Serializable {
 
     @Component.Factory
     interface Factory {

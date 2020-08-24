@@ -5,7 +5,7 @@ import com.squareup.moshi.Json
 data class EntryData(
     val title: String,
     @field:Json(name = "author_fullname") val author: String,
-    val created: Long,
+    @field:Json(name = "created_utc") val created: Long,
     @field:Json(name = "thumbnail") val thumbnailUrl: String,
     @field:Json(name = "num_comments") val commentCount: Int,
 )

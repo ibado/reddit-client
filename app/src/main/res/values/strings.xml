@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">reddit-client</string>
+    <string name="item_thumbnail">thumbnail</string>
 </resources>

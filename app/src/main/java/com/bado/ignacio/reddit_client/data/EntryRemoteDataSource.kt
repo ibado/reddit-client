@@ -14,6 +14,7 @@ class EntryRemoteDataSource @Inject constructor(private val service: TopService)
             Entry(
                 data.title,
                 data.author,
+                data.created,
                 data.thumbnailUrl,
                 data.commentCount,
             )
