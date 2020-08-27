@@ -20,6 +20,7 @@ class FeedAdapter(
     }
 
     override fun getItemCount() = entries.size
+
     fun setEntries(entries: List<Entry>) {
         this.entries = entries
         notifyDataSetChanged()

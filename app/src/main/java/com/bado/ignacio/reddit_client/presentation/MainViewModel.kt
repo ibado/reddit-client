@@ -6,13 +6,19 @@ import com.bado.ignacio.reddit_client.domain.EntryRepository
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class MainViewModel @Inject constructor(private val repository: EntryRepository) : ViewModel() {
+class MainViewModel (private val repository: EntryRepository) : ViewModel() {
 
     private val _entries = MutableLiveData<Result<List<Entry>>>()
 
     val entries: LiveData<Result<List<Entry>>> = _entries
 
     init {
+        fetchEntries()
+    }
+
+    fun refresh() = fetchEntries()
+
+    private fun fetchEntries() {
         viewModelScope.launch {
             try {
                 val topEntries = repository.getTop()

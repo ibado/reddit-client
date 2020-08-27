@@ -42,13 +42,18 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
             setAdapter(adapter)
         }
 
-        viewModel.entries.observe(viewLifecycleOwner, Observer {
+        viewModel.entries.observe(viewLifecycleOwner) {
+            binding.swipeLayout.apply { if (isRefreshing) isRefreshing = false }
             when (it) {
                 is Result.Ok -> adapter.setEntries(it.value)
                 is Result.Error ->
                     Log.e(TAG, "error fetching entries: ${it.throwable.message}")
             }
-        })
+        }
+
+        binding.swipeLayout.setOnRefreshListener {
+            viewModel.refresh()
+        }
     }
 
     companion object {
