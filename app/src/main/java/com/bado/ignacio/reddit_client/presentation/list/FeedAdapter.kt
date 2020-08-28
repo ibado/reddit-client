@@ -3,12 +3,13 @@ package com.bado.ignacio.reddit_client.presentation.list
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bado.ignacio.reddit_client.R
 import com.bado.ignacio.reddit_client.databinding.FeedItemBinding
-import com.bado.ignacio.reddit_client.domain.Entry
+import com.bado.ignacio.reddit_client.presentation.EntryView
 import com.bado.ignacio.reddit_client.presentation.loadFromURL
 
 class FeedAdapter(
-    private var entries: List<Entry>
+    private var entries: List<EntryView>
 ) : RecyclerView.Adapter<FeedAdapter.FeedViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeedViewHolder {
@@ -21,7 +22,7 @@ class FeedAdapter(
 
     override fun getItemCount() = entries.size
 
-    fun setEntries(entries: List<Entry>) {
+    fun setEntries(entries: List<EntryView>) {
         this.entries = entries
         notifyDataSetChanged()
     }
@@ -30,10 +31,13 @@ class FeedAdapter(
         private val binding: FeedItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: Entry) {
+        fun bind(item: EntryView) {
             binding.tvAuthor.text = item.author
             binding.tvTitle.text = item.title
-            binding.thumbnail.loadFromURL(item.thumbnailUrl)
+            binding.thumbnail.loadFromURL(item.imageURL)
+            binding.tvCreated.apply {
+                text = context.getString(R.string.created_text, item.hoursFromCreation)
+            }
         }
     }
 }

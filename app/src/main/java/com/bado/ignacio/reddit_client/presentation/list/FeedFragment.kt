@@ -6,13 +6,13 @@ import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bado.ignacio.reddit_client.R
 import com.bado.ignacio.reddit_client.databinding.FragmentFeedBinding
 import com.bado.ignacio.reddit_client.di.AppComponent
+import com.bado.ignacio.reddit_client.presentation.EntryView
 import com.bado.ignacio.reddit_client.presentation.MainViewModel
 import com.bado.ignacio.reddit_client.presentation.Result
 import java.lang.RuntimeException
@@ -42,12 +42,14 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
             setAdapter(adapter)
         }
 
-        viewModel.entries.observe(viewLifecycleOwner) {
+        viewModel.entries.observe(viewLifecycleOwner) { result ->
             binding.swipeLayout.apply { if (isRefreshing) isRefreshing = false }
-            when (it) {
-                is Result.Ok -> adapter.setEntries(it.value)
+            when (result) {
+                is Result.Ok -> adapter.setEntries(
+                    result.value.map { EntryView.fromEntry(it) }
+                )
                 is Result.Error ->
-                    Log.e(TAG, "error fetching entries: ${it.throwable.message}")
+                    Log.e(TAG, "error fetching entries: ${result.throwable.message}")
             }
         }
 
