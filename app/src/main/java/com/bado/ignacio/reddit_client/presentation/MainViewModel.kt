@@ -1,12 +1,14 @@
 package com.bado.ignacio.reddit_client.presentation
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.bado.ignacio.reddit_client.domain.Entry
 import com.bado.ignacio.reddit_client.domain.EntryRepository
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-class MainViewModel (private val repository: EntryRepository) : ViewModel() {
+class MainViewModel @ViewModelInject constructor(
+    private val repository: EntryRepository
+) : ViewModel() {
 
     private val _entries = MutableLiveData<Result<List<Entry>>>()
 
@@ -27,13 +29,5 @@ class MainViewModel (private val repository: EntryRepository) : ViewModel() {
                 _entries.value = Result.Error(throwable)
             }
         }
-    }
-
-    class Factory  @Inject constructor(
-        private val repository: EntryRepository
-    ) : ViewModelProvider.Factory {
-
-        @Suppress("UNCHECKED_CAST")
-        override fun <T : ViewModel?> create(modelClass: Class<T>) = MainViewModel(repository) as T
     }
 }
