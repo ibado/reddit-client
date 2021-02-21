@@ -1,12 +1,14 @@
 package com.bado.ignacio.reddit_client.presentation
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.bado.ignacio.reddit_client.domain.Entry
 import com.bado.ignacio.reddit_client.domain.EntryRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MainViewModel @ViewModelInject constructor(
+@HiltViewModel
+class MainViewModel @Inject constructor(
     private val repository: EntryRepository
 ) : ViewModel() {
 
