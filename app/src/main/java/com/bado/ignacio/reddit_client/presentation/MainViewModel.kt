@@ -1,6 +1,9 @@
 package com.bado.ignacio.reddit_client.presentation
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.bado.ignacio.reddit_client.domain.Entry
 import com.bado.ignacio.reddit_client.domain.EntryRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
