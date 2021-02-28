@@ -21,3 +21,5 @@ jobs:
       run: ./gradlew build
     - name: ktlint
       run: ./gradlew ktlint
+    - name: Test
+      run: ./gradlew test
